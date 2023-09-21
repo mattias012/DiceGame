@@ -11,17 +11,16 @@ public class Main {
 
 
         //Start game
-        initialize();
+        ArrayList<Player> listOfPlayers = initialize();
 
+        //Take turns
+        takeTurn(listOfPlayers);
     }
-    private static ArrayList<Player> initialize(){
+    private static ArrayList<Player> initialize() {
         // Call this method in main to start up the game.
 
         //Create a new instance of arraylist to store all the players.
         ArrayList<Player> listOfPlayers = new ArrayList<>();
-
-        //Create a new instance of arraylist to store all their dices
-        ArrayList<Die> listOfDices = new ArrayList<>();
 
         //Create a scanner to get some stuff from the players
         Scanner scanner = new Scanner(System.in);
@@ -33,29 +32,40 @@ public class Main {
         int numberOfDicesPerPlayer = Integer.parseInt(scanner.nextLine());
         System.out.println("How many sides?");
         int numberOfSidesOnDice = Integer.parseInt(scanner.nextLine());
-        scanner.close();
+
 
         //Create list of dices per person.
-        for (int j = 0; j < numberOfDicesPerPlayer; j++){
-            Die die = new Die(0, numberOfSidesOnDice);
-            listOfDices.add(j, die);
-        }
+
 
         //Connect the number of dices per list to the player list
-        for (int i = 0; i < numberOfPlayers; i++){
+        for (int i = 0; i < numberOfPlayers; i++) {
 
-            Player player = new Player("Player " + i, 0, listOfDices);
+            //Create a new instance of arraylist to store all their dices
+            //need to create a new list object each loop otherwise the players will all have the same list (even though they are identical)
+            ArrayList<Die> listOfDices = new ArrayList<>();
+
+            //Create a new dice object for each dice per player, store it in the list
+            for (int j = 0; j < numberOfDicesPerPlayer; j++) {
+                Die die = new Die(0, numberOfSidesOnDice);
+                listOfDices.add(j, die);
+            }
+
+            System.out.println("What is the name of player " + i + "?");
+            String name = scanner.nextLine();
+            Player player = new Player(name, 0, listOfDices);
             listOfPlayers.add(i, player);
         }
+        scanner.close();
+        System.out.println(listOfPlayers);
 
-//        System.out.println(listOfPlayers);
-//        System.out.println(listOfDices);
         return listOfPlayers;
     }
-    private static void takeTurn(ArrayList<Player> players){
+
+    private static void takeTurn(ArrayList<Player> players) {
 
     }
-    private static ArrayList<Player> getWinners(ArrayList<Player> players){
+
+    private static ArrayList<Player> getWinners(ArrayList<Player> players) {
 
         ArrayList<Player> scoreboard = new ArrayList<>();
 

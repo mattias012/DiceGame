@@ -14,7 +14,7 @@ public class Die {
     }
 
     public void roll(){
-        this.currentValue = random.nextInt(6) + 1;
+        this.currentValue = random.nextInt(this.sides) + 1;
     }
 
     public int getCurrentValue(){

@@ -1,16 +1,17 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class Player {
 
     private String name;
     private int points;
-    private ArrayList<Die> listOfDices = new ArrayList<>();
+    private ArrayList<Die> listOfDices;
 
     public Player(String name, int points, ArrayList<Die> listOfDices){
                 this.name = name;
                 this.points = points;
                 this.listOfDices = listOfDices;
     }
+
 
     public void rollDice(){
         //roll all dices in the players list.

@@ -13,9 +13,10 @@ public class Main {
         //Start game
         ArrayList<Player> listOfPlayers = initialize();
 
-        //Take turns
+        //Play the game
         takeTurn(listOfPlayers);
     }
+
     private static ArrayList<Player> initialize() {
         // Call this method in main to start up the game.
 
@@ -33,29 +34,21 @@ public class Main {
         System.out.println("How many sides?");
         int numberOfSidesOnDice = Integer.parseInt(scanner.nextLine());
 
-
-        //Create list of dices per person.
-
-
         //Connect the number of dices per list to the player list
         for (int i = 0; i < numberOfPlayers; i++) {
 
-            //Create a new instance of arraylist to store all their dices
-            //need to create a new list object each loop otherwise the players will all have the same list (even though they are identical)
-            ArrayList<Die> listOfDices = new ArrayList<>();
+            System.out.println("What is the name of player " + (i + 1) + "?");
+            String name = scanner.nextLine();
+            Player player = new Player(name);
 
-            //Create a new dice object for each dice per player, store it in the list
             for (int j = 0; j < numberOfDicesPerPlayer; j++) {
-                Die die = new Die(0, numberOfSidesOnDice);
-                listOfDices.add(j, die);
+
+                player.addDie(numberOfSidesOnDice);
             }
 
-            System.out.println("What is the name of player " + i + "?");
-            String name = scanner.nextLine();
-            Player player = new Player(name, 0, listOfDices);
             listOfPlayers.add(i, player);
         }
-        scanner.close();
+
         System.out.println(listOfPlayers);
 
         return listOfPlayers;
@@ -63,6 +56,11 @@ public class Main {
 
     private static void takeTurn(ArrayList<Player> players) {
 
+        for (Player player : players) {
+
+                player.rollDice();
+
+        }
     }
 
     private static ArrayList<Player> getWinners(ArrayList<Player> players) {

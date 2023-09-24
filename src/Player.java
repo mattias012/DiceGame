@@ -15,22 +15,10 @@ public class Player {
 
     public void rollDice() {
 
-        Scanner scanner = new Scanner(System.in);
-
-        int whatThePlayerGuessed;
-
         for (Die die : this.listOfDices) {
-            //ask user what the number will be
-            System.out.println("guess");
-            whatThePlayerGuessed = Integer.parseInt(scanner.nextLine());
             //roll the dices
             die.roll();
-            int sumOfAllDices = getDieValue();
-            //check if the number is the same as guessed
-            System.out.println(getDieValue());
-            if (sumOfAllDices == whatThePlayerGuessed) {
-                System.out.println("ok du gissa rätt");
-            }
+            //
         }
 
     }
@@ -53,6 +41,9 @@ public class Player {
     }
     public int getPoints(){
         return this.points;
+    }
+    public String getName(){
+        return this.name;
     }
 
     public String toString() {

@@ -9,12 +9,14 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
+       final int NUMBER_OF_TURNS = 5;
 
         //Start game
         ArrayList<Player> listOfPlayers = initialize();
 
         //Play the game
-        takeTurn(listOfPlayers);
+        takeTurn(listOfPlayers, NUMBER_OF_TURNS);
+
     }
 
     private static ArrayList<Player> initialize() {
@@ -54,12 +56,40 @@ public class Main {
         return listOfPlayers;
     }
 
-    private static void takeTurn(ArrayList<Player> players) {
+    private static void takeTurn(ArrayList<Player> players, int NUMBER_OF_TURNS) {
 
-        for (Player player : players) {
+        int turn[] = {1, 2, 3, 4, 5};
 
+        for (int i = 0; i < NUMBER_OF_TURNS; i++) {
+            for (Player player : players) {
+
+                //Each player rolls all their dices.
                 player.rollDice();
+                //Store the sum of each roll in this variable.
+                int sumOfAllDices = player.getDieValue();
 
+                //Lets see what the user guessed
+                Scanner scanner = new Scanner(System.in);
+
+                int whatThePlayerGuessed;
+
+
+                //ask user what the number will be
+                System.out.println("Turn " + (turn[i]) + ". Guess the sum of the dices " + player.getName() + "?");
+                whatThePlayerGuessed = Integer.parseInt(scanner.nextLine());
+
+                //check if the number is the same as guessed
+                System.out.println(sumOfAllDices);
+
+                if (sumOfAllDices == whatThePlayerGuessed) {
+                    System.out.println("Correct! Points to you");
+                    player.increaseScore(); //increase this players score
+                } else {
+                    System.out.println("Wrong guess! Better luck next time.");
+                }
+
+
+            }
         }
     }
 

@@ -11,7 +11,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
-       final int NUMBER_OF_TURNS = 5;
+        //Define number of turns in the game
+        final int NUMBER_OF_TURNS = 5;
 
         //Start game
         ArrayList<Player> listOfPlayers = initialize();
@@ -21,10 +22,16 @@ public class Main {
 
         //Display Scoreboard
         getWinners(listOfPlayers);
-        for (Player player : listOfPlayers){
-            System.out.println(player.getName());
+        int pos = 1;
+        for (Player player : listOfPlayers) {
+            if (pos == 1){
+                System.out.println(pos + ". ### " + player.getName() + " " + player.getPoints() + "p ###");
+            }
+            else {
+                System.out.println(pos + ". " + player.getName() + " " + player.getPoints() + "p");
+            }
+            pos++;
         }
-
     }
 
     private static ArrayList<Player> initialize() {
@@ -51,15 +58,15 @@ public class Main {
             String name = scanner.nextLine();
             Player player = new Player(name);
 
+            //Add a new dice as requested
             for (int j = 0; j < numberOfDicesPerPlayer; j++) {
 
                 player.addDie(numberOfSidesOnDice);
             }
 
+            //Store players in the list.
             listOfPlayers.add(i, player);
         }
-
-        System.out.println(listOfPlayers);
 
         return listOfPlayers;
     }

@@ -4,6 +4,8 @@
 //En omgång är slut då en sista spelaren har gissat och rullat sina tärningar.
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Main {
@@ -16,6 +18,12 @@ public class Main {
 
         //Play the game
         takeTurn(listOfPlayers, NUMBER_OF_TURNS);
+
+        //Display Scoreboard
+        getWinners(listOfPlayers);
+        for (Player player : listOfPlayers){
+            System.out.println(player.getName());
+        }
 
     }
 
@@ -58,8 +66,11 @@ public class Main {
 
     private static void takeTurn(ArrayList<Player> players, int NUMBER_OF_TURNS) {
 
+        //Just to print which turn it is.
         int turn[] = {1, 2, 3, 4, 5};
 
+        //Loop each player 5 times. Loop inside loop because we want all players to participate in each turn
+        //Then we restart the for i loop to take next turn.
         for (int i = 0; i < NUMBER_OF_TURNS; i++) {
             for (Player player : players) {
 
@@ -70,9 +81,7 @@ public class Main {
 
                 //Lets see what the user guessed
                 Scanner scanner = new Scanner(System.in);
-
                 int whatThePlayerGuessed;
-
 
                 //ask user what the number will be
                 System.out.println("Turn " + (turn[i]) + ". Guess the sum of the dices " + player.getName() + "?");
@@ -87,16 +96,16 @@ public class Main {
                 } else {
                     System.out.println("Wrong guess! Better luck next time.");
                 }
-
-
             }
         }
     }
 
     private static ArrayList<Player> getWinners(ArrayList<Player> players) {
 
-        ArrayList<Player> scoreboard = new ArrayList<>();
+        //Do not really understand this part yet.
+        Comparator<Player> comparePoints = (player1, player2) -> player2.getPoints() - player1.getPoints();
+        Collections.sort(players, comparePoints);
 
-        return scoreboard;
+        return players;
     }
 }
